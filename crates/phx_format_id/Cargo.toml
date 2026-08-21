@@ -1,0 +1,9 @@
+[package]
+name = "phx_format_id"
+description = "The magic-byte table, once. Identifies a file's format from its bytes and, separately, from its name, so a renamed file and a damaged one are never reported as the same thing. Consumed by phx_analyze_engine and generated into the browser checker's JavaScript."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]

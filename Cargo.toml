@@ -1,0 +1,36 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/phx_format_id",
+    "crates/phx_zip_core",
+    "crates/phx_analyze_engine",
+    "crates/phx_recovery",
+    "crates/phx_recover_oss",
+    "crates/phx_test_utils",
+]
+
+[workspace.package]
+version = "0.2.1"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+
+[workspace.dependencies]
+phx_format_id      = { path = "crates/phx_format_id" }
+phx_zip_core       = { path = "crates/phx_zip_core" }
+phx_analyze_engine = { path = "crates/phx_analyze_engine" }
+phx_recovery       = { path = "crates/phx_recovery" }
+phx_test_utils     = { path = "crates/phx_test_utils" }
+
+clap        = { version = "4.5", features = ["derive"] }
+ed25519-dalek = { version = "2.0", features = ["rand_core"] }
+flate2      = "1.0"
+rand        = "0.8"
+serde       = { version = "1.0", features = ["derive"] }
+serde_json  = "1.0"
+sha2        = "0.10"
+sha3        = "0.10"
+hmac        = "0.12"
+thiserror   = "2.0"
+tracing     = "0.1"
+uuid        = { version = "1.0", features = ["v4", "serde"] }

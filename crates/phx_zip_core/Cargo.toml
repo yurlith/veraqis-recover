@@ -1,0 +1,17 @@
+[package]
+name = "phx_zip_core"
+description = "Format-detection/evidence core for ZIP-family containers — no filesystem, no threads, wasm32-unknown-unknown target (docs/web-studio/WASM_FEASIBILITY.md, Phase G / G0)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+# One dependency: flate2, for CRC-32 and DEFLATE in the CD/local-header cross-check
+# (opc_zip) and the fixture encoder (build). flate2's default feature is the pure-Rust
+# miniz_oxide backend (not the zlib-sys C backend), so it is wasm32-unknown-unknown
+# compatible without changes — confirmed by the wasm32 build below, not assumed.
+[dependencies]
+flate2 = { workspace = true }
+
+[dev-dependencies]
+phx_test_utils = { workspace = true }

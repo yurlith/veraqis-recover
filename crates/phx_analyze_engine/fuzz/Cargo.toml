@@ -1,0 +1,29 @@
+# cargo-fuzz crate. Intentionally NOT a member of the parent workspace (the
+# empty [workspace] table below detaches it), so `cargo build --workspace`
+# never tries to build it. Run with: `cargo +nightly fuzz run hasher`.
+[package]
+name = "phx_analyze_engine-fuzz"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[workspace]
+
+[dependencies]
+libfuzzer-sys = "0.4"
+phx_analyze_engine = { path = ".." }
+
+[[bin]]
+name = "hasher"
+path = "fuzz_targets/hasher.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "classifier"
+path = "fuzz_targets/classifier.rs"
+test = false
+doc = false

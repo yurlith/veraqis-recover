@@ -1,0 +1,32 @@
+[package]
+name = "phx_analyze_engine"
+description = "PHX Module 1/2/3 — Analysis, Health, Integrity"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+phx_format_id = { workspace = true }
+serde      = { workspace = true }
+serde_json = { workspace = true }
+thiserror  = { workspace = true }
+tracing    = { workspace = true }
+uuid       = { workspace = true }
+sha2       = { workspace = true }
+sha3       = { workspace = true }
+hmac       = { workspace = true }
+flate2     = { workspace = true }
+
+[dev-dependencies]
+phx_test_utils = { workspace = true }
+serde_json     = { workspace = true }
+criterion      = "0.5"
+
+[[bench]]
+name = "throughput"
+harness = false
+
+[[bench]]
+name = "memory"
+harness = false

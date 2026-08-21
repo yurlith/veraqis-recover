@@ -1,0 +1,13 @@
+[package]
+name = "phx_test_utils"
+description = "PHX shared test helpers (fixtures, generators, assertions)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+phx_analyze_engine = { workspace = true }
+sha2 = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

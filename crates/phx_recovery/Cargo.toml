@@ -1,0 +1,27 @@
+[package]
+name = "phx_recovery"
+description = "Open structural archive-recovery engine — ZIP/gzip/tar/RAR5/7z repair, independently CRC/SHA-verified. The open core of a larger commercial engine; see the workspace README for what this omits and why."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+phx_analyze_engine = { workspace = true }
+# Evidence-only ZIP core (no filesystem, no threads; wasm32-compatible).
+phx_zip_core        = { workspace = true }
+flate2              = { workspace = true }
+serde                = { workspace = true }
+serde_json           = { workspace = true }
+sha2                 = { workspace = true }
+# Signs the repair manifest sidecar with a caller-supplied (or per-run
+# ephemeral) Ed25519 key — no vendor key material, no certificate scheme.
+ed25519-dalek        = { workspace = true }
+rand                 = { workspace = true }
+thiserror             = { workspace = true }
+tracing               = { workspace = true }
+
+[dev-dependencies]
+phx_test_utils = { workspace = true }
+# Reference CRC-32 for cross-checking the in-house `crc` engine in tests only.
+crc32fast = "1.5"

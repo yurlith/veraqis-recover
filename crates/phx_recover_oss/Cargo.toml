@@ -1,0 +1,21 @@
+[package]
+name = "phx_recover_oss"
+description = "Open-core structural archive recovery CLI — ZIP/gzip/tar/RAR5/7z repair, independently CRC/SHA-verified. One mode, no tiers, no licensing."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "phx-recover-oss"
+path = "src/main.rs"
+
+[dependencies]
+phx_recovery       = { workspace = true }
+phx_analyze_engine = { workspace = true }
+phx_zip_core       = { workspace = true }
+phx_format_id      = { workspace = true }
+clap               = { workspace = true }
+
+[dev-dependencies]
+phx_test_utils = { workspace = true }
