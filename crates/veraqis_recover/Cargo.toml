@@ -1,13 +1,13 @@
 [package]
-name = "phx_recover_oss"
-description = "Open-core structural archive recovery CLI — ZIP/gzip/tar/RAR5/7z repair, independently CRC/SHA-verified. One mode, no tiers, no licensing."
+name = "veraqis_recover"
+description = "VERAQIS open-core structural archive recovery CLI — ZIP/gzip/tar/RAR5/7z repair, independently CRC/SHA-verified. One mode, no tiers, no licensing."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 
 [[bin]]
-name = "phx-recover-oss"
+name = "veraqis-recover"
 path = "src/main.rs"
 
 [dependencies]

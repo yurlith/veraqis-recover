@@ -593,18 +593,6 @@ name = "phx_format_id"
 version = "0.2.1"
 
 [[package]]
-name = "phx_recover_oss"
-version = "0.2.1"
-dependencies = [
- "clap",
- "phx_analyze_engine",
- "phx_format_id",
- "phx_recovery",
- "phx_test_utils",
- "phx_zip_core",
-]
-
-[[package]]
 name = "phx_recovery"
 version = "0.2.1"
 dependencies = [
@@ -1044,6 +1032,18 @@ dependencies = [
  "js-sys",
  "serde_core",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "veraqis_recover"
+version = "0.2.1"
+dependencies = [
+ "clap",
+ "phx_analyze_engine",
+ "phx_format_id",
+ "phx_recovery",
+ "phx_test_utils",
+ "phx_zip_core",
 ]
 
 [[package]]

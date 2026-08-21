@@ -1,4 +1,4 @@
-//! `phx-recover-oss` — open-core structural archive recovery.
+//! `veraqis-recover` — open-core structural archive recovery.
 //!
 //! The open half of the PHX/VERAQIS recovery engine: base structural repair
 //! for ZIP/gzip/tar (central-directory reconstruction, CRC fixes, member
@@ -35,7 +35,7 @@ const EXIT_FATAL: i32 = 2;
 /// — if `--output` is given — attempts recovery, writing only bytes an
 /// independent checksum proves. Never modifies the source.
 #[derive(Debug, Parser)]
-#[command(name = "phx-recover-oss", version, about)]
+#[command(name = "veraqis-recover", version, about)]
 struct Cli {
     /// Damaged archive to analyze (read-only; never modified).
     path: PathBuf,
@@ -56,13 +56,13 @@ fn run(cli: &Cli) -> i32 {
     let analysis = match Engine::new().analyze(&cli.path, AnalysisConfig::default()) {
         Ok(a) => a,
         Err(e) => {
-            eprintln!("phx-recover-oss: analysis failed: {e}");
+            eprintln!("veraqis-recover: analysis failed: {e}");
             return EXIT_FATAL;
         }
     };
 
     println!(
-        "phx-recover-oss: {} — {}",
+        "veraqis-recover: {} — {}",
         cli.path.display(),
         if analysis.is_clean() {
             "no structural damage detected"
@@ -75,7 +75,7 @@ fn run(cli: &Cli) -> i32 {
     }
 
     let Some(output_dir) = cli.output.clone() else {
-        println!("phx-recover-oss: pass --output <dir> to attempt recovery.");
+        println!("veraqis-recover: pass --output <dir> to attempt recovery.");
         return if analysis.is_clean() {
             EXIT_SUCCESS
         } else {
@@ -84,7 +84,7 @@ fn run(cli: &Cli) -> i32 {
     };
 
     if let Err(e) = std::fs::create_dir_all(&output_dir) {
-        eprintln!("phx-recover-oss: cannot create output directory: {e}");
+        eprintln!("veraqis-recover: cannot create output directory: {e}");
         return EXIT_FATAL;
     }
 
@@ -97,7 +97,7 @@ fn run(cli: &Cli) -> i32 {
     match RecoveryEngine::new().recover(&cli.path, &analysis, &options) {
         Ok(report) => {
             println!(
-                "phx-recover-oss: {} — {} byte(s) verified-recovered, {} byte(s) lost \
+                "veraqis-recover: {} — {} byte(s) verified-recovered, {} byte(s) lost \
                  (unproven bytes are never emitted: false_recovered_bytes = 0)",
                 if report.success {
                     "recovery succeeded"
@@ -117,7 +117,7 @@ fn run(cli: &Cli) -> i32 {
             }
         }
         Err(e) => {
-            eprintln!("phx-recover-oss: recovery failed: {e}");
+            eprintln!("veraqis-recover: recovery failed: {e}");
             EXIT_FATAL
         }
     }
@@ -130,7 +130,7 @@ mod tests {
 
     fn temp_dir(name: &str) -> PathBuf {
         std::env::temp_dir().join(format!(
-            "phx-recover-oss-test-{}-{name}",
+            "veraqis-recover-test-{}-{name}",
             std::process::id()
         ))
     }

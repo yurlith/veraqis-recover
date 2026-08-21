@@ -1,6 +1,7 @@
-# phx-recover-oss
+# veraqis-recover
 
-An open-source structural recovery engine and CLI for damaged archive files.
+An open-source structural recovery engine and CLI for damaged archive files,
+from the team behind [VERAQIS](https://veraqis.tech).
 
 It repairs **ZIP, gzip, tar, RAR5, and 7z** containers by reconstructing the
 structure that survived — a central directory rebuilt from local headers, a
@@ -34,16 +35,16 @@ use the structural-repair core freely under a permissive license.
 
 ```sh
 cargo build --release
-./target/release/phx-recover-oss path/to/damaged.zip --output ./recovered
+./target/release/veraqis-recover path/to/damaged.zip --output ./recovered
 ```
 
 Without `--output`, it analyzes and reports without writing anything
 (a dry run). Example output on a ZIP with a truncated central directory:
 
 ```
-phx-recover-oss: damaged.zip — structural damage detected
+veraqis-recover: damaged.zip — structural damage detected
   - ZIP_EOCD_001 (Catastrophic)
-phx-recover-oss: recovery succeeded — 17679 byte(s) verified-recovered, 0 byte(s) lost
+veraqis-recover: recovery succeeded — 17679 byte(s) verified-recovered, 0 byte(s) lost
   note: rebuilt central directory for 4 member(s) from local headers
 ```
 
@@ -62,7 +63,7 @@ nothing here calls out to a network.
 | `phx_zip_core` | Format-detection/evidence core for ZIP-family containers (no filesystem, no threads). |
 | `phx_analyze_engine` | Damage detection, health scoring, integrity checks. |
 | `phx_recovery` | The structural repair strategies themselves. |
-| `phx_recover_oss` | This CLI. |
+| `veraqis_recover` | This CLI. |
 | `phx_test_utils` | Shared test fixtures (dev-only). |
 
 ## Building

@@ -5,7 +5,7 @@ members = [
     "crates/phx_zip_core",
     "crates/phx_analyze_engine",
     "crates/phx_recovery",
-    "crates/phx_recover_oss",
+    "crates/veraqis_recover",
     "crates/phx_test_utils",
 ]
 
