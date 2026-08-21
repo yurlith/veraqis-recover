@@ -5,6 +5,9 @@
 //! "no false entries" is trivially true of an empty result, and this repository has already been
 //! bitten once by a nested test that passed on an empty list.
 
+// `phx_recovery::semantic::opc::zip` is itself only a re-export of
+// `phx_zip_core::opc_zip` — go straight to the real, open source instead of
+// routing through the closed `semantic` module (OPEN_CORE_STRATEGY.md §4).
 use phx_recovery::zip_index::LocalHeaderIndex;
 use phx_recovery::zip_offset_map::OffsetMapKind;
 use phx_recovery::zip_policy::ZipRecoveryPolicy;

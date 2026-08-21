@@ -495,6 +495,9 @@ fn entry_evidence_records(
     plans: &[RepairPlan],
 ) -> Vec<crate::manifest::EntryEvidenceRecord> {
     use crate::manifest::EntryEvidenceRecord;
+    // `semantic::opc::zip` is itself only a re-export of `phx_zip_core::opc_zip`
+    // — go straight to the real, open source instead of routing through the
+    // closed `semantic` module (OPEN_CORE_STRATEGY.md §4).
     use phx_zip_core::opc_zip::{extract_entry, parse_zip, ExtractStatus};
 
     let src = parse_zip(source_bytes);
