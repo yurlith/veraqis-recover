@@ -7,10 +7,12 @@
 //! engine, which pulls in `reed-solomon-simd`, `ed25519-dalek`, `rand`, and other
 //! dependencies that are not part of this evidence-only surface.
 //!
-//! `phx_recovery` re-exports every module here at its original path
-//! (`phx_recovery::cd_scan`, `phx_recovery::verdict`, `phx_recovery::semantic::opc::zip`,
-//! …), so no downstream call site changes. See `docs/web-studio/WASM_FEASIBILITY.md`,
-//! Phase G / G0.
+//! `phx_recovery` re-exports most modules here at their original path
+//! (`phx_recovery::cd_scan`, `phx_recovery::verdict`, …), so most downstream call
+//! sites don't change. `opc_zip` is the one exception: it's used directly as
+//! `phx_zip_core::opc_zip` rather than through any `phx_recovery` re-export, so
+//! that one path is stable across every `phx_recovery` build configuration,
+//! including ones that don't compile the modules that used to alias it.
 
 pub mod android_backup_container;
 pub mod cd_scan;
