@@ -91,6 +91,7 @@ fn run(cli: &Cli) -> i32 {
     let options = RecoveryOptions {
         output_dir,
         hash_type: analysis.integrity_result.hash_type,
+        tool_name: "veraqis-recover".to_string(),
         ..Default::default()
     };
 

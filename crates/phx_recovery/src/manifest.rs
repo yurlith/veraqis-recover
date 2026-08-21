@@ -161,6 +161,7 @@ impl RepairManifest {
         bytes_lost: u64,
         output_verified: bool,
         key: &SigningKey,
+        tool_name: &str,
     ) -> Self {
         let records = repairs
             .iter()
@@ -186,7 +187,7 @@ impl RepairManifest {
 
         let body = ManifestBody {
             format_version: MANIFEST_VERSION.to_string(),
-            tool: format!("phx {}", env!("CARGO_PKG_VERSION")),
+            tool: format!("{tool_name} {}", env!("CARGO_PKG_VERSION")),
             source_path: source_path.to_string(),
             output_path: output_path.to_string(),
             source_sha256: hex(&Sha256::digest(source_bytes)),
@@ -282,10 +283,15 @@ mod tests {
             0,
             false,
             &key,
+            "test-tool",
         );
         assert!(m.verify(), "freshly signed manifest must verify");
         assert_eq!(m.body.guarantees.unverified_bytes, 100);
         assert_eq!(m.body.repairs[0].guarantee, Guarantee::Unverified);
+        assert!(
+            m.body.tool.starts_with("test-tool "),
+            "tool name must be the caller's, not hardcoded"
+        );
     }
 
     #[test]
@@ -302,6 +308,7 @@ mod tests {
             0,
             true,
             &key,
+            "test-tool",
         );
         // Verified output ⇒ Verified guarantee.
         assert_eq!(m.body.repairs[0].guarantee, Guarantee::Verified);

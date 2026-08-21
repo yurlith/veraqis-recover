@@ -39,6 +39,10 @@ pub struct RecoveryOptions {
     /// Optional 32-byte Ed25519 seed to sign the manifest with. `None` ⇒ a
     /// per-run ephemeral key (tamper-evidence without authenticated identity).
     pub sign_key: Option<[u8; 32]>,
+    /// The calling binary's name, recorded in the manifest's `tool` field
+    /// (e.g. `"phx"`, `"veraqis-recover"`) so a manifest correctly identifies
+    /// which tool produced it instead of a name hardcoded into this crate.
+    pub tool_name: String,
 }
 
 impl Default for RecoveryOptions {
@@ -51,6 +55,7 @@ impl Default for RecoveryOptions {
             hash_type: HashType::Sha256,
             write_manifest: true,
             sign_key: None,
+            tool_name: "phx".to_string(),
         }
     }
 }
@@ -343,6 +348,7 @@ impl RecoveryEngine {
             aggregate.bytes_lost,
             output_verified,
             &key,
+            &options.tool_name,
         );
         let mut os = output_path.as_os_str().to_owned();
         os.push(".phxr.json");
